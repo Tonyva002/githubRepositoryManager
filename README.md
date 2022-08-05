@@ -6,8 +6,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-Application that consumes the github API
-
 Download or Clone the repository.
 
 Unzip the file.
