@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function Repositories() {
   const [repositories, setRepositories] = useState([]);
-  const [search, setSearch] = useState("js");
+  const [search, setSearch] = useState("html");
 
   // Funcion para cargar repositorios por defecto
   useEffect(() => {
@@ -14,12 +14,14 @@ function Repositories() {
     if (e.key === "Enter") {
       setSearch(e.target.value);
     }
+    console.log(search);
   
   };
 
   // Funcion para buscar repositorio por el boton
   const clickSearch = (e) => {
-    setSearch(e.target.value);
+    setSearch(search);
+    console.log(search);
   };
 
   // Funcion para conectarte al API de github
@@ -28,8 +30,7 @@ function Repositories() {
       "https://api.github.com/search/repositories?q=" +
       search +
       "+in:full_name&type=Repositories&sort=score&order=desc&per_page=6";
-    const headers = { Accept: "application/vnd.github.cloak-preview" };
-    const response = await fetch(url, { method: "GET", headers: headers });
+    const response = await fetch(url);
     const result = await response.json();
 
     if (result.items != null) {
@@ -90,8 +91,8 @@ function Repositories() {
               className="btn btn-outline-secondary"
               type="button"
               id="button-addon2"
-              onClick={clickSearch}
-              value="este es el boton"
+              onClick={ clickSearch}
+        
             >
               <i className="fas fa-search"></i> Search
             </button>

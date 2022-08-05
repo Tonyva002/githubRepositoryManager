@@ -6,45 +6,17 @@ function Collaborators () {
     const [collaborators, setCollaborators] = useState([]);
     const [top, setTop] = useState(10);
     const [auxCollaborators, setAuxCollaborators] = useState([]);
+    
+
    
-
-    useEffect( () => {
-
+      useEffect( () => {
         loadCollaborators();
-
     },[]);
 
-   
-    const moreCollaborators  = (event) => {
-        if ((((setTop(top+5)) - auxCollaborators.length) >= 5) && ((setTop(top+5)) > auxCollaborators.length)){
-            alert("Llego al tope");
-
-        }else{
-            let arrayAux = [];
-            var newTop = top;
-
-            if(((newTop+5) - auxCollaborators.length) < 5){
-                var auxTop = (auxCollaborators.length - newTop);
-                newTop +=  auxTop;
-
-            }else {
-                newTop +=  5;
-            }
-
-            for(let i = 0; i < newTop; i++){
-
-                arrayAux.push(setAuxCollaborators[i]);
-            }
-
-        }
-
-    }
 
     async function loadCollaborators(){
-
         const url = localStorage.getItem("linkCollaborators");
-        const headers = {"Accept": "application/vnd.github.hellcat-preview+json"}
-        const response = await fetch(" "+ url + "", {"method":"GET","headers": headers});
+        const response = await fetch( url );
         const result = await response.json();
         let arrayAux = [];
 
@@ -62,13 +34,47 @@ function Collaborators () {
 
     }
 
+
+   
+    const moreCollaborators  = (event) => {
+        if ((((top+5) - auxCollaborators.length) >= 5) && ((top+5) > auxCollaborators.length)){
+
+            alert("Llego al tope");
+            
+        }else{
+            let arrayAux = [];
+            var newTop = top;
+
+            if(((newTop+5) - auxCollaborators.length) < 5){
+                var auxTop = (auxCollaborators.length - newTop);
+                newTop +=  auxTop;
+
+            }else {
+                newTop +=  5;
+                
+            }
+
+            for(let i = 0; i < newTop; i++){
+
+                arrayAux.push(auxCollaborators[i]);
+            }
+            setCollaborators(arrayAux);
+            setTop(newTop);
+            setAuxCollaborators(auxCollaborators);
+            console.log(newTop)
+            console.log(arrayAux)
+
+        }
+
+    }
+
+    
         return (
             <div className="row">
                 <div className="card bg-light mb-3 ">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="#" className="card-link">Repositories</a></li>
-                            <li className="breadcrumb-item active" aria-current="page"><a href="#" className="card-link">Collaborators</a></li>
+                            <li className="breadcrumb-item active" aria-current="page">Collaborators</li>
                         </ol>
                     </nav>
                 </div>
