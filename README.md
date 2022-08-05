@@ -1,10 +1,20 @@
-# Getting Started with Create React App
+# Application that consumes the github API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+Application that consumes the github API
+
+Download or Clone the repository.
+
+Unzip the file.
+
+Delete the yarn.lock file.
+
+### `yarn install`
 
 ### `yarn start`
 
